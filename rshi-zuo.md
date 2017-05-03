@@ -1,12 +1,8 @@
- 
-
- 
-
- 
+# R 實作
 
 ---
 
-```R Script
+```
 #----------------------------------------------------------------------------------------------
 # prepare training data
 #----------------------------------------------------------------------------------------------
@@ -76,8 +72,6 @@ stepresult=stepAIC(fit1, direction='both')
 vcol=get_variables(stepresult$call)
 
 needdata.tsmc=data.frame(class, data[,vcol])
-#needdata.tsmc=data.frame(class,data[,3],data[,4],data[,5],data[,11],data[,12],data[,14],data[,15],data[,16],data[,17],data[,18],data[,20],data[,21],data[,22],data[,23],data[,25],data[,26],data[,27],data[,28],data[,30],data[,31],data[,32],data[,33],data[,34],data[,36],data[,37],data[,38],data[,40],data[,41],data[,42],data[,43],data[,45],data[,46],data[,47],data[,48],data[,49],data[,51],data[,55],data[,56],data[,57],data[,59],data[,60])
-#names(needdata.tsmc)=c('class','v3','v4','v5','v11','v12','v14','v15','v16','v17','v18','v20','v21','v22','v23','v25','v26','v27','v28','v30','v31','v32','v33','v34','v36','v37','v38','v40','v41','v42','v43','v45','v46','v47','v48','v49','v51','v55','v56','v57','v59','v60')
 needdata=needdata.tsmc
 #head(needdata)
 
@@ -188,8 +182,6 @@ prematrixc50=c()
 
 needdata$class=as.factor(needdata$class)
 testdata$class=as.factor(testdata$class)
-
-
 
 for(i in (row.train+1):(row.all-120)){
   
