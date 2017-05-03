@@ -18,28 +18,28 @@ row.train=lrow
 class=rep(0, lrow)
 
 for(i in 1:(lrow-1)){
-  
+
   data.fun=rep(closeprice[i], lrow-i)
   data.com=closeprice[(i+1):lrow]
   data.ret=(data.com-data.fun)/data.fun
-  
+
   com10=c()
   com5=c()
-  
+
   com5=which(data.ret<(-0.05))
   com10=which(data.ret>=0.1)
- 
+
   if((length(com5)!=0)&(length(com10)!=0)){
-  
+
     if(com10[1]<com5[1]){
-      
+
       class[i]=1
     } 
-  
+
   }
-  
+
   if((length(com5)==0)&(length(com10)!=0)){
-    
+
     class[i]=1
   }
 }
@@ -52,12 +52,12 @@ data.total=data.frame(class, data)
 
 
 get_variables <- function(stepresult.call){
-  
+
   stepresult.call=attr(stepresult$terms, 'term.labels')
   stepresult.call=gsub('v','',stepresult.call)
-  
+
   stepresult.variables=as.numeric(stepresult.call)
-  
+
   return(stepresult.variables)
 }
 
@@ -91,28 +91,28 @@ row.all=lrow
 class=rep(0, lrow)
 
 for(i in 1:(lrow-1)){
-  
+
   data.fun=rep(closeprice[i], lrow-i)
   data.com=closeprice[(i+1):lrow]
   data.ret=(data.com-data.fun)/data.fun
-  
+
   com10=c()
   com5=c()
-  
+
   com5=which(data.ret<(-0.05))
   com10=which(data.ret>=0.1)
-  
+
   if((length(com5)!=0)&(length(com10)!=0)){
-    
+
     if(com10[1]<com5[1]){
-      
+
       class[i]=1
     } 
-    
+
   }
-  
+
   if((length(com5)==0)&(length(com10)!=0)){
-    
+
     class[i]=1
   }
 }
@@ -122,7 +122,7 @@ for(i in 1:(lrow-1)){
 realmatrix=c()
 
 for(i in (row.train+1):(row.all-120)){
-  
+
   realmatrix[i-row.train]=as.matrix(class[i])
 }
 
@@ -154,14 +154,14 @@ prematrixsvm=c()
 
 
 for(i in (row.train+1):(row.all-120)){
-  
+
   # training data by svm -- create model
   tsvm=svm(class~., data=needdata[1:(row.train-250),], type='C-classification', cost=2, kernal='radial basis', gamma=0.1, scale=TRUE)
-  
+
   # predict result by model
   pretsvm=predict(tsvm, testdata[i, -1])
-  
-  
+
+
   data.resultsvm[i-row.train]=sum(pretsvm==testdata$class[i])/length(pretsvm)
   #prematrixsvm[i-row.train]=as.character.factor(pretsvm)
   prematrixsvm[i-row.train]=as.character.factor(pretsvm)
@@ -184,17 +184,17 @@ needdata$class=as.factor(needdata$class)
 testdata$class=as.factor(testdata$class)
 
 for(i in (row.train+1):(row.all-120)){
-  
+
   # training data by c50 -- create model
   trainc50=C5.0(class~., needdata[1:(row.train-250),], trial=5, control=C5.0Control(subset=FALSE, noGlobalPruning=TRUE, CF=0.25))
-  
+
   # predict result by model
   predc50=predict(trainc50, testdata[i, -1], trials=5, type='class')
-  
-  
+
+
   data.resultc50[i-row.train]=sum(predc50==testdata$class[i])/length(predc50)
   prematrixc50[i-row.train]=as.character.factor(predc50)
-  
+
 }
 
 #
@@ -202,9 +202,9 @@ summary(data.resultc50)
 t=table(prematrixc50, realmatrix)
 t
 sum(diag(t)/sum(t))
-
-
 ```
+
+> 源碼：[https://goo.gl/0sOR5k](https://goo.gl/0sOR5k)
 
 
 
