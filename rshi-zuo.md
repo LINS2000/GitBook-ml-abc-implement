@@ -204,7 +204,7 @@ t
 sum(diag(t)/sum(t))
 ```
 
-> 源碼：[https://goo.gl/0sOR5k](https://goo.gl/0sOR5k)
+> 原始碼：[https://goo.gl/0sOR5k](https://goo.gl/0sOR5k)
 
 
 
