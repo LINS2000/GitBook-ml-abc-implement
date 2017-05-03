@@ -1,3 +1,26 @@
-# First Chapter
+# 來實作一個ML的例子
 
-GitBook allows you to organize your book into chapters, each chapter is stored in a separate file like this one.
+---
+
+> # 題目
+
+# 假設投資標的是台積電，買進後回報達10%，且最大虧損不能達-5%，我們想知道何時可以買進？
+
+> # 開始準備資料讓機器去學習
+
+![](/assets/data-prepare)
+
+> # 訓練資料
+
+# \(1\) 提供原始題目的正解，以及觀測數據 \(此例拿技術指標的資料\)
+
+# \(2\) 套用迴歸分析挑出影響顯著數據 \(降低維度\)
+
+# \(3\) 以顯著數據套用演算法建立model
+
+> # 預測資料
+
+# 用當天資料輸入model求解，與正解比對，判定機器學習成果。
+
+
+
